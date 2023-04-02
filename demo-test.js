@@ -16,11 +16,13 @@ mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
 });
 
-const Product = mongoose.model("Product", {
-  title: String,
-  price: Number,
-  description: String,
+const productSchema = new mongoose.Schema({
+  title: { type: String, required: true, minlength: 3, maxlength: 255 },
+  price: { type: Number, required: true, min: 0 },
+  description: { type: String, required: true, minlength: 3, maxlength: 255 },
 });
+
+const Product = mongoose.model("Product", productSchema);
 
 app.get("/products", (req, res) => {
   Product.find().then((products) => res.json(products));
