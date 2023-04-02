@@ -1,1 +1,27 @@
-Hello <% title %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head'); %>
+  </head>
+  <body class="container">
+    <header><%- include('../partials/header'); %></header>
+    <main>
+      <div class="jumbotron">
+        <h1>Welcome to my E-Commerce applications</h1>
+        <h4>Your goods is being routed to the following customer:</h4>
+        <ul>
+          <li><b>title</b>: <%= title %></li>
+          <li><b>message</b>: <%= message %></li>
+          <li><b>name</b>: <%= name %></li>
+        </ul>
+      </div>
+      <div class="jumbotron">
+        <h4 style="margin-top: 24px">
+          Our App gives <b>low stress</b>, <b>high availability</b> and
+          <b>optimized cost</b> for your producsts
+        </h4>
+      </div>
+    </main>
+    <footer><%- include('../partials/footer'); %></footer>
+  </body>
+</html>
