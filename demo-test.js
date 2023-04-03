@@ -1,12 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const bodyParser = require("body-parser");
 
 const app = express();
 const port = process.env.PORT || 8800;
 
-const bodyParser = require("body-parser");
-app.use(bodyParser.json());
+// Middleware
+app.use(bodyParser.json()); // create appliction/json parser
+// app.use(bodyParser.urlencoded({ extended: true })); // create application/x-www-form-urlencoded parser
 
 // console.dir(app); // find out all that make an express app
 
@@ -24,25 +26,25 @@ const productSchema = new mongoose.Schema({
 
 const Product = mongoose.model("Product", productSchema);
 
-app.get("/products", (req, res) => {
+app.get("/api/products", (req, res) => {
   Product.find().then((products) => res.json(products));
 });
 
-app.post("/products", (req, res) => {
+app.post("/api/products", (req, res) => {
   Product.create(req.body).then((product) => res.json(product));
 });
 
-app.get("/products/:id", (req, res) => {
+app.get("/api/products/:id", (req, res) => {
   Product.findById(req.params.id).then((product) => res.json(product));
 });
 
-app.put("/products/:id", (req, res) => {
+app.put("/api/products/:id", (req, res) => {
   Product.findByIdAndUpdate(req.params.id, req.body).then(() => {
     Product.findById(req.params.id).then((product) => res.json(product));
   });
 });
 
-app.delete("/products/:id", (req, res) => {
+app.delete("/api/products/:id", (req, res) => {
   Product.findByIdAndDelete(req.params.id).then(() => res.sendStatus(200));
 });
 
