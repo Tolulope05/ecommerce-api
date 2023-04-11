@@ -2,10 +2,10 @@ var express = require("express");
 var router = express.Router();
 
 // middleware that is specific to this router
-router.use((req, res, next) => {
-  console.log("Time: ", Date.now());
-  next();
-}); // demo sake
+// router.use((req, res, next) => {
+//   console.log("Time: ", Date.now().toString());
+//   next();
+// }); // demo sake
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
