@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema({
   title: String, // { type: String, required: true, minlength: 3, maxlength: 255 },
   price: Number, // { type: Number, required: true, min: 0 },
