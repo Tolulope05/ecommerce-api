@@ -10,7 +10,10 @@ router.post("/login", async (req, res) => {
     const token = await user.generateAuthToken();
     res.send({ user, token });
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(400).send({
+      error: "Login failed! Check authentication credentials",
+      message: error.message,
+    });
   }
 });
 
@@ -22,7 +25,11 @@ router.post("/register", async (req, res) => {
     const token = await user.generateAuthToken();
     res.status(201).send({ user, token });
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(400).send({
+      error: "Registration failed!",
+      message: error.message,
+      s,
+    });
   }
 });
 
@@ -35,7 +42,11 @@ router.post("/logout", async (req, res) => {
     await req.user.save();
     res.send();
   } catch (error) {
-    res.status(500).send(error.message);
+    // res.status(500).send(error.message);
+    res.status(500).send({
+      error: "Logout failed!",
+      message: error.message,
+    });
   }
 });
 
