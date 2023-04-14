@@ -41,8 +41,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
 app.use("/api/auth", authController);
-
-app.use("/api/", indexRouter);
+app.use("/api", indexRouter);
 app.use("/api/products", productsRouter);
 
 // catch 404 and forward to error handler
