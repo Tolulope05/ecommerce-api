@@ -9,10 +9,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.status(200).render("pages/index", {
-    title: "Tolulope Title",
-    message: "Tolulope Message",
-    name: "Tolulope Name",
+  // res.status(200).render("pages/index", {
+  //   title: "Welcome to the Ecommerce API",
+  // });
+  res.status(200).json({
+    message: "Welcome to the Ecommerce API",
   });
 });
 
