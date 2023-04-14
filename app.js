@@ -25,8 +25,14 @@ mongoose.connect(
     useNewUrlParser: true,
     useUnifiedTopology: true,
   }
-  
 );
+mongoose.connection.on("connected", () => {
+  console.log(`Connected to MongoDB ${process.env.MONGO_URL}`);
+});
+
+mongoose.connection.on("error", (err) => {
+  console.log("Error connecting to MongoDB", err);
+});
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
