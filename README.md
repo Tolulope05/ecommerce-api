@@ -46,3 +46,7 @@
   - DB_STRING: `your database URI`
 
 ---
+
+## Author
+
++ TOLULOPE FAKUNLE
