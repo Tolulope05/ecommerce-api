@@ -6,11 +6,11 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
-const authController = require("./controllers/auth");
 const mongoose = require("mongoose");
 
 // routes
 var indexRouter = require("./routes/index");
+const authRouter = require("./routes/auth");
 var productsRouter = require("./routes/products");
 
 // constants for the app
@@ -35,7 +35,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
-app.use("/api/auth", authController);
+app.use("/api/auth", authRouter);
 app.use("/api", indexRouter);
 app.use("/api/products", productsRouter);
 
