@@ -28,7 +28,6 @@ router.post("/register", async (req, res) => {
     res.status(400).send({
       error: "Registration failed!",
       message: error.message,
-      s,
     });
   }
 });
