@@ -4,7 +4,7 @@ const Product = require("../models/product_model");
 const authenticate = require("../middleware/auth");
 
 // middleware that is specific to this router
-router.use(authenticate);
+router.use(authenticate.auth);
 
 // do something with the router
 router.use((req, res, next) => {
