@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/product_model");
-const authController = require("../controllers/auth_controller");
+const authenticate = require("../middleware/auth");
 
 // middleware that is specific to this router
-router.use(authController.auth);
+router.use(authenticate);
 
 // do something with the router
 router.use((req, res, next) => {
