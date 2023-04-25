@@ -15,15 +15,14 @@ router.use((req, res, next) => {
 //get all products
 router.get("/", async (req, res, next) => {
   const products = await Product.find({});
-  res.send(products);
+  res.json(products);
 });
 
 // post a product
 router.post("/", async (req, res, next) => {
   const product = new Product(req.body);
   await product.save();
-  s;
-  res.send(product);
+  res.json(product);
 });
 
 // get a product
@@ -40,7 +39,9 @@ router.put("/:id", async (req, res, next) => {
 
 // delete a product
 router.delete("/:id", async (req, res, next) => {
-  Product.findByIdAndDelete(req.params.id).then(() => res.sendStatus(200));
+  Product.findByIdAndDelete(req.params.id).then(() =>
+    res.json({ message: "Product deleted" })
+  );
 });
 
 // export the router

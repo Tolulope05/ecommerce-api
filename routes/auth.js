@@ -8,9 +8,9 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findByCredentials(email, password);
     const token = await user.generateAuthToken();
-    res.send({ user, token });
+    res.json({ user, token });
   } catch (error) {
-    res.status(400).send({
+    res.status(400).json({
       error: "Login failed! Check authentication credentials",
       message: error.message,
     });
@@ -39,7 +39,7 @@ router.post("/logout", async (req, res) => {
       return token.token !== req.token;
     });
     await req.user.save();
-    res.send();
+    res.json({ message: "Logout successful!", user: req.user });
   } catch (error) {
     // res.status(500).send(error.message);
     res.status(500).send({
