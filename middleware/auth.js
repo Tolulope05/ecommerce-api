@@ -47,4 +47,58 @@ const checkDuplicateUsernameOrEmail = (req, res, next) => {
   });
 };
 
-module.exports = { auth, checkDuplicateUsernameOrEmail };
+const checkIsCustomer = (req, res, next) => {
+  User.findById(req.user.id).exec((err, user) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+
+    if (user.role !== "customer") {
+      res.status(403).send({ message: "Require Customer Role!" });
+      return;
+    }
+
+    next();
+  });
+};
+
+const checkIsEmployee = (req, res, next) => {
+  User.findById(req.user.id).exec((err, user) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+
+    if (user.role !== "employee") {
+      res.status(403).send({ message: "Require Employee Role!" });
+      return;
+    }
+
+    next();
+  });
+};
+
+const checkIsAdmin = (req, res, next) => {
+  User.findById(req.user.id).exec((err, user) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+
+    if (user.role !== "admin") {
+      res.status(403).send({ message: "Require Admin Role!" });
+      return;
+    }
+
+    next();
+  });
+};
+
+module.exports = {
+  auth,
+  checkDuplicateUsernameOrEmail,
+  checkIsCustomer,
+  checkIsEmployee,
+  checkIsAdmin,
+};

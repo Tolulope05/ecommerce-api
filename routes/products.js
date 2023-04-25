@@ -31,14 +31,14 @@ router.get("/:id", async (req, res, next) => {
 });
 
 // update a product
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", [authenticate.checkIsAdmin], async (req, res, next) => {
   Product.findByIdAndUpdate(req.params.id, req.body).then(() => {
     Product.findById(req.params.id).then((product) => res.json(product));
   });
 });
 
 // delete a product
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", [authenticate.checkIsAdmin], async (req, res, next) => {
   Product.findByIdAndDelete(req.params.id).then(() =>
     res.json({ message: "Product deleted" })
   );
