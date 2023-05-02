@@ -90,5 +90,46 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// count orders
+
+router.get("/get/count", async (req, res) => {
+  try {
+    const orderCount = await Order.countDocuments((count) => count);
+    res.send({ orderCount });
+  } catch (error) {
+    res.json({ message: error, success: false });
+  }
+});
+
+// get total sales
+
+router.get("/get/totalsales", async (req, res) => {
+  try {
+    const totalSales = await Order.aggregate([
+      { $group: { _id: null, totalsales: { $sum: "$totalPrice" } } },
+    ]);
+    res.send({ totalSales: totalSales.pop().totalsales });
+  } catch (error) {
+    res.json({ message: error, success: false });
+  }
+});
+
+// change order status
+
+router.put("/:id", async (req, res) => {
+  try {
+    const order = await Order.findByIdAndUpdate(
+      req.params.id,
+      {
+        status: req.body.status,
+      },
+      { new: true }
+    );
+    res.send(order);
+  } catch (error) {
+    res.json({ message: error, success: false });
+  }
+});
+
 // export the router
 module.exports = router;
