@@ -30,6 +30,11 @@ router.get("/:id", async (req, res, next) => {
   Product.findById(req.params.id).then((product) => res.json(product));
 });
 
+// get all products of a category
+router.get("/category/:id", async (req, res, next) => {
+  //
+});
+
 // update a product
 router.put("/:id", [authenticate.checkIsAdmin], async (req, res, next) => {
   Product.findByIdAndUpdate(req.params.id, req.body).then(() => {

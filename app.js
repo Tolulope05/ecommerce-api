@@ -1,23 +1,25 @@
-var createError = require("http-errors");
-var express = require("express");
-var mongoDB = require("./config/db");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const createError = require("http-errors");
+const express = require("express");
+const mongoDB = require("./config/db");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 // routes
-var indexRouter = require("./routes/index");
+const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
-var productsRouter = require("./routes/products");
+const productsRouter = require("./routes/products");
+const ordersRouter = require("./routes/orders");
+const categoriesRouter = require("./routes/categories");
 
 // constants for the app
 const port = process.env.PORT || 8800;
 dotenv.config();
 
-var app = express();
+const app = express();
 
 // Connect to MongoDB
 mongoDB();
@@ -37,6 +39,8 @@ app.use(express.static(path.join(__dirname, "public")));
 // Routes
 app.use("/api/auth", authRouter);
 app.use("/api/products", productsRouter);
+app.use("/api/orders", ordersRouter);
+app.use("/api/categories", categoriesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

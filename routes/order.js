@@ -46,6 +46,19 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// get user orders
+router.get("/user/:id", async (req, res) => {
+  try {
+    const orders = await Order.find({ user: req.params.id })
+
+      .populate("product")
+      .populate("user");
+    res.send(orders);
+  } catch (error) {
+    res.json({ message: error, success: false });
+  }
+});
+
 // update a specific order
 
 router.patch("/:id", async (req, res) => {
