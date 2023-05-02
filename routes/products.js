@@ -32,7 +32,9 @@ router.get("/:id", async (req, res, next) => {
 
 // get all products of a category
 router.get("/category/:id", async (req, res, next) => {
-  //
+  Product.find({ category: req.params.id }).then((product) =>
+    res.json(product)
+  );
 });
 
 // update a product
