@@ -16,6 +16,11 @@ const paymentSchema = new mongoose.Schema(
       update_time: String,
       email_address: String,
     },
+    order: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Order",
+      required: true,
+    },
     amount: {
       type: Number,
       required: true,
