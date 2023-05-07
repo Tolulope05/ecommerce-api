@@ -13,7 +13,7 @@ router.post("/payment", async (req, res) => {
     const payment = new Payment({
       user: req.user._id,
       paymentMethod: req.body.payment_method,
-      order: order_id,
+      order: req.body.order_id,
       paymentResult: {
         id: payment_status.id,
         status: payment_status.status,
@@ -25,15 +25,12 @@ router.post("/payment", async (req, res) => {
       isPaid: true,
       paidAt: Date.now(),
     });
-
-    const savedPayment = await payment.save();
-    // res.json(savedPayment);
+    payment.save();
 
     // update order status
-    const updateStatus = await Order.updateOne(
-      { _id: order_id },
-      { status: "completed" }
-    );
+    const updateStatus = await Order.findByIdAndUpdate(req.body.order_id, {
+      $set: { status: "paid" },
+    });
     res.json(updateStatus); // return the updated order
   } catch (error) {
     console.log(error);
@@ -49,3 +46,5 @@ router.get("/", async (req, res) => {
     res.json({ message: error, success: false });
   }
 });
+
+// get a specific payment
