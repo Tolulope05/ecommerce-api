@@ -48,3 +48,11 @@ router.get("/", async (req, res) => {
 });
 
 // get a specific payment
+router.get("/:id", async (req, res) => {
+  try {
+    const payment = await Payment.findById(req.params.id);
+    res.send(payment);
+  } catch (error) {
+    res.json({ message: error, success: false });
+  }
+});
