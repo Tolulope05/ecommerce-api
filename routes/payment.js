@@ -110,6 +110,4 @@ router.post("/verify", async (req, res) => {
   }
 });
 
-// get all transactions
-
 module.exports = router;
