@@ -7,8 +7,28 @@ const authenticate = require("../middleware/auth");
 // middleware that is specific to this router
 router.use(authenticate.auth);
 
+// get all payments
+router.get("/", async (req, res) => {
+  try {
+    const payments = await Payment.find();
+    res.send(payments);
+  } catch (error) {
+    res.json({ message: error, success: false });
+  }
+});
+
+// get a specific payment
+router.get("/:id", async (req, res) => {
+  try {
+    const payment = await Payment.findById(req.params.id);
+    res.send(payment);
+  } catch (error) {
+    res.json({ message: error, success: false });
+  }
+});
+
 // make a payment
-router.post("/payment", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const payment = new Payment({
       user: req.user._id,
@@ -37,22 +57,4 @@ router.post("/payment", async (req, res) => {
   }
 });
 
-// get all payments
-router.get("/", async (req, res) => {
-  try {
-    const payments = await Payment.find();
-    res.send(payments);
-  } catch (error) {
-    res.json({ message: error, success: false });
-  }
-});
-
-// get a specific payment
-router.get("/:id", async (req, res) => {
-  try {
-    const payment = await Payment.findById(req.params.id);
-    res.send(payment);
-  } catch (error) {
-    res.json({ message: error, success: false });
-  }
-});
+module.exports = router;

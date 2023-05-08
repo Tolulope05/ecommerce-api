@@ -14,6 +14,7 @@ const authRouter = require("./routes/auth");
 const productsRouter = require("./routes/products");
 const ordersRouter = require("./routes/orders");
 const categoriesRouter = require("./routes/categories");
+const paymentRouter = require("./routes/payment");
 
 // constants for the app
 const port = process.env.PORT || 8800;
@@ -41,6 +42,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/orders", ordersRouter);
 app.use("/api/categories", categoriesRouter);
+app.use("/api/payment", paymentRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
