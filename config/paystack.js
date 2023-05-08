@@ -30,7 +30,23 @@ const paystack = (request) => {
     };
     request(options, callback);
   };
-  return { initializePayment, verifyPayment };
+
+  const listTransactions = (mycallback) => {
+    const options = {
+      url: "https://api.paystack.co/transaction",
+      headers: {
+        authorization: MySecretKey,
+        "content-type": "application/json",
+        "cache-control": "no-cache",
+      },
+    };
+    const callback = (error, response, body) => {
+      return mycallback(error, body);
+    };
+    request(options, callback);
+  };
+
+  return { initializePayment, verifyPayment, listTransactions };
 };
 
 module.exports = paystack;
