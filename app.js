@@ -9,7 +9,6 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 // routes
-const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
 const productsRouter = require("./routes/products");
 const ordersRouter = require("./routes/orders");
