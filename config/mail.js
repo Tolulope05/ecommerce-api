@@ -77,10 +77,20 @@ const sendForgotPasswordEmail = async (email, token) => {
   await sendEmail(email, subject, html);
 };
 
+const sendWelcomeEmail = async (email, name) => {
+  const subject = "Welcome to E - Commerce";
+  const html = `
+        <p>Hi ${name},</p>
+        <p>Thank you for registering on our site</p>
+    `;
+  await sendEmail(email, subject, html);
+};
+
 module.exports = {
   sendEmail,
   sendResetPasswordEmail,
   sendVerificationEmail,
   sendOrderEmail,
   sendForgotPasswordEmail,
+  sendWelcomeEmail,
 };

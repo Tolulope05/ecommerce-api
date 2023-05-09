@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user_model");
 const authenticate = require("../middleware/auth");
+const { sendWelcomeEmail } = require("../config/mail");
 
 // Login user
 router.post("/login", async (req, res) => {
@@ -27,6 +28,7 @@ router.post(
       const user = new User(req.body);
       await user.save();
       const token = await user.generateAuthToken();
+      sendWelcomeEmail(user.email, user.name);
       res.status(201).send({ user, token });
     } catch (error) {
       res.status(400).send({
