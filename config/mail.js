@@ -1,21 +1,23 @@
 const nodemailer = require("nodemailer");
 
-// const transporter = nodemailer.createTransport({
-//   service: "gmail",
-//   auth: {
-//     user: "",
-//     pass: "",
-//   },
-// }); // I dont have account for this
+const testAccunt = await nodemailer.createTestAccount(); // I dont have account for this
+const transporter = nodemailer.createTransport({
+  host: "smtp.ethereal.email",
+  port: 587,
+  secure: false,
+  service: "gmail",
+  auth: {
+    user: testAccunt.user,
+    pass: testAccunt.pass,
+  },
+}); // I dont have account for this
 
-const transporter = nodemailer.createTestAccount();
-
-const sendEmail = (email, subject, text) => {
+const sendEmail = async (email, subject, html) => {
   const mailOptions = {
     from: "E - Commerce <fakunletolulope05@gmail.com>",
     to: email,
     subject,
-    text,
+    html,
   };
 
   transporter.sendMail(mailOptions, (err, info) => {
