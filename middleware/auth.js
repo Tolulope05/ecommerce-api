@@ -18,11 +18,6 @@ const checkDuplicateUsernameOrEmail = (req, res, next) => {
   User.findOne({
     username: req.body.username,
   }).then((user) => {
-    if (!user) {
-      res.status(500).send({ message: "Error fetching user from server" });
-      return;
-    }
-
     if (user) {
       res.status(400).send({ message: "Failed! Username is already in use!" });
       return;
@@ -32,11 +27,6 @@ const checkDuplicateUsernameOrEmail = (req, res, next) => {
     User.findOne({
       email: req.body.email,
     }).then((user) => {
-      if (!user) {
-        res.status(500).send({ message: "Error fetching user from server" });
-        return;
-      }
-
       if (user) {
         res.status(400).send({ message: "Failed! Email is already in use!" });
         return;
@@ -49,11 +39,6 @@ const checkDuplicateUsernameOrEmail = (req, res, next) => {
 
 const checkIsCustomer = (req, res, next) => {
   User.findById(req.user.id).then((user) => {
-    if (!user) {
-      res.status(500).send({ message: "Error fetching user from server" });
-      return;
-    }
-
     if (user.role !== "customer") {
       res.status(403).send({ message: "Require Customer Role!" });
       return;
@@ -65,11 +50,6 @@ const checkIsCustomer = (req, res, next) => {
 
 const checkIsEmployee = (req, res, next) => {
   User.findById(req.user.id).then((user) => {
-    if (!user) {
-      res.status(500).send({ message: "Error fetching user from server" });
-      return;
-    }
-
     if (user.role !== "employee") {
       res.status(403).send({ message: "Require Employee Role!" });
       return;
@@ -81,11 +61,6 @@ const checkIsEmployee = (req, res, next) => {
 
 const checkIsAdmin = (req, res, next) => {
   User.findById(req.user.id).then((user) => {
-    if (!user) {
-      res.status(500).send({ message: "Error fetching user from server" });
-      return;
-    }
-
     if (user.role !== "admin") {
       res.status(403).send({ message: "Require Admin Role!" });
       return;

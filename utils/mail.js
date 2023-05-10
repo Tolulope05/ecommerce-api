@@ -12,19 +12,19 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendEmail = async (email, subject, html) => {
-  try {
-    const mailOptions = {
-      from: "E - Commerce <fakunletolulope05@gmail.com>",
-      to: email,
-      subject,
-      html,
-    };
+  const mailOptions = {
+    from: "fakunletolulope05@gmail.com",
+    to: email,
+    subject,
+    html,
+  };
 
-    let info = await transporter.sendMail(mailOptions);
-    console.log("Email sent: " + info.messageId);
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  try {
+    await transporter.sendMail(mailOptions);
+    return Promise.resolve("Message Sent Successfully!");
   } catch (error) {
     console.log(error);
+    return Promise.reject(error);
   }
 };
 
