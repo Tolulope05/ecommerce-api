@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
     user: testAccunt.user,
     pass: testAccunt.pass,
   },
-}); // I dont have account for this
+});
 
 const sendEmail = async (email, subject, html) => {
   const mailOptions = {
@@ -20,13 +20,9 @@ const sendEmail = async (email, subject, html) => {
     html,
   };
 
-  transporter.sendMail(mailOptions, (err, info) => {
-    if (err) {
-      console.log(err);
-    }
-    console.log("Email sent: " + info.response);
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-  });
+  let info = await transporter.sendMail(mailOptions);
+  console.log("Email sent: " + info.messageId);
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 };
 
 const sendResetPasswordEmail = async (email, token) => {
@@ -82,6 +78,8 @@ const sendWelcomeEmail = async (email, name) => {
   const html = `
         <p>Hi ${name},</p>
         <p>Thank you for registering on our site</p>
+        <p>Regards,</p>
+        <p><b>E - Commerce Team<b></p>
     `;
   await sendEmail(email, subject, html);
 };

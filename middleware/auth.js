@@ -17,9 +17,9 @@ const checkDuplicateUsernameOrEmail = (req, res, next) => {
   // Username
   User.findOne({
     username: req.body.username,
-  }).then((err, user) => {
-    if (err) {
-      res.status(500).send({ message: err });
+  }).then((user) => {
+    if (!user) {
+      res.status(500).send({ message: "Error fetching user from server" });
       return;
     }
 
@@ -31,9 +31,9 @@ const checkDuplicateUsernameOrEmail = (req, res, next) => {
     // Email
     User.findOne({
       email: req.body.email,
-    }).then((err, user) => {
-      if (err) {
-        res.status(500).send({ message: err });
+    }).then((user) => {
+      if (!user) {
+        res.status(500).send({ message: "Error fetching user from server" });
         return;
       }
 
@@ -48,9 +48,9 @@ const checkDuplicateUsernameOrEmail = (req, res, next) => {
 };
 
 const checkIsCustomer = (req, res, next) => {
-  User.findById(req.user.id).then((err, user) => {
-    if (err) {
-      res.status(500).send({ message: err });
+  User.findById(req.user.id).then((user) => {
+    if (!user) {
+      res.status(500).send({ message: "Error fetching user from server" });
       return;
     }
 
@@ -64,9 +64,9 @@ const checkIsCustomer = (req, res, next) => {
 };
 
 const checkIsEmployee = (req, res, next) => {
-  User.findById(req.user.id).then((err, user) => {
-    if (err) {
-      res.status(500).send({ message: err });
+  User.findById(req.user.id).then((user) => {
+    if (!user) {
+      res.status(500).send({ message: "Error fetching user from server" });
       return;
     }
 
@@ -80,9 +80,9 @@ const checkIsEmployee = (req, res, next) => {
 };
 
 const checkIsAdmin = (req, res, next) => {
-  User.findById(req.user.id).then((err, user) => {
-    if (err) {
-      res.status(500).send({ message: err });
+  User.findById(req.user.id).then((user) => {
+    if (!user) {
+      res.status(500).send({ message: "Error fetching user from server" });
       return;
     }
 
