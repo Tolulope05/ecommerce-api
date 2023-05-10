@@ -17,7 +17,7 @@ const checkDuplicateUsernameOrEmail = (req, res, next) => {
   // Username
   User.findOne({
     username: req.body.username,
-  }).exec((err, user) => {
+  }).then((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
@@ -31,7 +31,7 @@ const checkDuplicateUsernameOrEmail = (req, res, next) => {
     // Email
     User.findOne({
       email: req.body.email,
-    }).exec((err, user) => {
+    }).then((err, user) => {
       if (err) {
         res.status(500).send({ message: err });
         return;
@@ -48,7 +48,7 @@ const checkDuplicateUsernameOrEmail = (req, res, next) => {
 };
 
 const checkIsCustomer = (req, res, next) => {
-  User.findById(req.user.id).exec((err, user) => {
+  User.findById(req.user.id).then((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
@@ -64,7 +64,7 @@ const checkIsCustomer = (req, res, next) => {
 };
 
 const checkIsEmployee = (req, res, next) => {
-  User.findById(req.user.id).exec((err, user) => {
+  User.findById(req.user.id).then((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
@@ -80,7 +80,7 @@ const checkIsEmployee = (req, res, next) => {
 };
 
 const checkIsAdmin = (req, res, next) => {
-  User.findById(req.user.id).exec((err, user) => {
+  User.findById(req.user.id).then((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
       return;

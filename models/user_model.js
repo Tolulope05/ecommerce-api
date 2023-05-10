@@ -14,7 +14,6 @@ const userSchema = new mongoose.Schema({
     default:
       "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg",
   },
-
   email: {
     type: String,
     required: true,
