@@ -1,28 +1,31 @@
 const nodemailer = require("nodemailer");
 
-const testAccunt = nodemailer.createTestAccount(); // I dont have account for this
 const transporter = nodemailer.createTransport({
-  host: "smtp.ethereal.email",
-  port: 587,
-  secure: false,
   service: "gmail",
   auth: {
-    user: testAccunt.user,
-    pass: testAccunt.pass,
+    user: process.env.GMAIL_USER,
+    pass: process.env.PASSWORD,
+    clientId: process.env.OAUTH_CLIENTID,
+    clientSecret: process.env.OAUTH_CLIENT_SECRET,
+    refreshToken: process.env.OAUTH_REFRESH_TOKEN,
   },
 });
 
 const sendEmail = async (email, subject, html) => {
-  const mailOptions = {
-    from: "E - Commerce <fakunletolulope05@gmail.com>",
-    to: email,
-    subject,
-    html,
-  };
+  try {
+    const mailOptions = {
+      from: "E - Commerce <fakunletolulope05@gmail.com>",
+      to: email,
+      subject,
+      html,
+    };
 
-  let info = await transporter.sendMail(mailOptions);
-  console.log("Email sent: " + info.messageId);
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    let info = await transporter.sendMail(mailOptions);
+    console.log("Email sent: " + info.messageId);
+    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const sendResetPasswordEmail = async (email, token) => {
