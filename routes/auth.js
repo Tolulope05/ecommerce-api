@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user_model");
 const authenticate = require("../middleware/auth");
-const { sendWelcomeEmail } = require("../config/mail");
+const { sendWelcomeEmail } = require("../utils/mail");
 
 // Login user
 router.post("/login", async (req, res) => {
